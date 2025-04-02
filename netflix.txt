@@ -1,0 +1,48 @@
+use netflix;
+
+-- 1. Count the number of Movies vs TV Shows
+
+select type,count(type) from netflix_titles group by type;
+
+-- 2. Find the most common rating for movies and TV shows
+
+select type,rating, count(*) from netflix_titles group by type,rating;
+
+-- 3. List all movies released in a specific year (e.g., 2020)
+
+select * from netflix_titles where type='movie' and release_year='2020';
+
+-- 4. Find the top 5 countries with the most content on Netflix
+
+select country,count(show_id) as total_content from netflix_titles 
+group by country order by 2 limit 5; 
+
+-- 5. Identify the longest movie
+
+select * from netflix_titles where type='movie'and 
+duration=(select max(duration) from netflix_titles); 
+
+-- 6. Find all the movies/TV shows by director 'Haile Gerima'!
+
+select * from netflix_titles where director ='Haile Gerima';
+
+-- 7.10.Find each year and the average numbers of content release 
+-- in India on netflix. return top 5 year with highest avg content release!
+
+select * from netflix_titles where country='India';
+
+-- 8. List all movies that are documentaries
+
+select * from netflix_titles listed_in like '%documentaries';
+
+-- 9. Find all content without a director
+
+select * from netflix_titles where director is null;
+
+-- 10 Find how many movies actor 'Brooke Satchwell' appeared in last 10 years!
+
+select * from netflix_titles where cast='Brooke Satchwell';
+
+
+select * from netflix_titles;
+
